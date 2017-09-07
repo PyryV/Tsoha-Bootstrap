@@ -3,8 +3,8 @@
 Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](https://www.cs.helsinki.fi)
-* [Linkki dokumentaatiooni](https://www.github.com)
+* [Linkki dokumentaatiooni](https://docs.google.com/document/d/1YWEAaT-cB7WOeJ_SG_VV4lAtv1442xsMUSH2ONIJlFo/edit?usp=sharing)
 
 ## Työn aihe
 
-Laita tähän aihekuvaus tai [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Pokemon-kanta.html) 
+Sovellus johon voi tallettaa urheilutilastoja
