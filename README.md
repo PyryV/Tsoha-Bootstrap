@@ -3,7 +3,7 @@
 Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://vpyry.users.cs.helsinki.fi/tsoha)
-* [Linkki dokumentaatiooni](https://docs.google.com/document/d/1YWEAaT-cB7WOeJ_SG_VV4lAtv1442xsMUSH2ONIJlFo/edit?usp=sharing)
+* [Linkki dokumentaatiooni](https://github.com/PyryV/Tsoha-Bootstrap/blob/master/doc/Tietokantasovellus.pdf)
 
 ## Työn aihe
 
