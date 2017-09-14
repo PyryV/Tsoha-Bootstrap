@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Pelaajan muokkaus</h1>
+    
+    <form>
+        <div class="form-group">
+            <label>Nimi</label>
+            <input class="form-control" value="Sidney Crosby" type="text">
+        </div>
+        <fieldset>
+            <legend>Pelipaikka</legend>
+            <input type="radio" name="pelipaikka" value="hyökkääjä">Hyökkääjä<br>
+            <input type="radio" name="pelipaikka" value="puolustaja">Puolustaja<br>
+            <input type="radio" name="pelipaikka" value="maalivahti">Maalivahti<br>
+        </fieldset>
+        <div class="form-group">
+            <label>Taso (0-99)</label>
+            <input class="form-control" value="95" type="text">
+        </div>
+        <div class="form-group">
+            <label>Joukkue</label>
+            <input class="form-control" value="Pittspurgh Penguins" type="text">
+        </div>
+        
+    </form> 
+
+    <p>
+        <a href="#" class="btn btn-success">Tallenna</a>
+    </p>
+
+{% endblock %}

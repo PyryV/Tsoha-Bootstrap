@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Pekan joukkue</h1>
+    
+    <!--Joukkueen taitotaso-->
+    <h1>Taso: 81</h1>
+    
+    <!--Joukkueen tiedot listana-->
+    <ul>
+        <li><strong>Pelaajia: 21</strong></li>
+        <li>Hyökkääjiä: 12</li>
+        <li>Puolustajia: 7</li>
+        <li>Maalivahteja: 2</li>
+    </ul>
+    
+    <!--Painikkeet-->
+    <p>
+        <a href="#" class="btn btn-default">Muokkaa</a><button class="btn btn-danger">Poista</button>
+    </p>
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Nimi</th>
+                <th>Pelipaikka</th>
+                <th>Taso</th>
+                <th>Joukkue</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            <tr>
+                <td>Sidney Crosby</td>
+                <td>Hyökkääjä</td>
+                <td>95</td>
+                <td>Winnipeg Jets</td>
+                <td><a href="#" class="btn btn-default btn-sm">Muokkaa</a></td>
+                <td><button class="btn btn-danger">Poista</button></td>
+            </tr>
+        </tbody>
+    </table>
+    
+
+
+{% endblock %}
