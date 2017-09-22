@@ -1,6 +1,6 @@
 <?php
-
-  class HelloWorldController extends BaseController{
+require 'app/models/pelaaja.php';    
+class HelloWorldController extends BaseController{
 
     public static function index(){
       // make-metodi renderöi app/views-kansiossa sijaitsevia tiedostoja
@@ -10,7 +10,13 @@
 
     public static function sandbox(){
       // Testaa koodiasi täällä
-      View::make('helloworld.html');
+       // $sidney = new Pelaaja(['id' => 1, 'kayttaja' => 1, 'nimi' => 'Sidney Crosby',
+         //   'seura' => 'Pittshburg Penguins', 'taso' => 94, 'pelipaikka' => 'hyökkääjä']);
+        $crosby = Pelaaja::find(1);
+        $pelit = Pelaaja::all();
+        
+        Kint::dump($crosby);
+        Kint::dump($pelit);
     }
     
     public static function login(){

@@ -1,6 +1,8 @@
 <?php
 
-  $routes->get('/', function() {
+
+
+  /*$routes->get('/', function() {
     HelloWorldController::index();
   });
 
@@ -27,3 +29,26 @@
   $routes->get('/joukkueet/1/pelaajamuokkaus', function() {
     HelloWorldController::muokkaus_pelaaja();
   });
+   */
+  
+  $routes->post('/pelaajat', function(){
+      PelaajaController::store();
+  });
+  
+  $routes->get('/pelaajat/uusi', function(){
+      PelaajaController::create();
+  });
+  
+  $routes->get('/pelaajat', function() {
+      PelaajaController::index();
+  });
+  
+  $routes->get('/pelaajat/:id', function($id) {
+      PelaajaController::esittely($id);
+  });
+  
+  
+  
+  
+  
+  

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Kirjautuneena: Pekka</h1>
+    
+    <p>
+        <a href="{{base_path}}/pelaajat/uusi" class="btn btn-success">Luo uusi pelaaja</a>
+    </p>
+    
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Nimi</th>
+                <th>Seura</th>
+                <th>Taso</th>
+                <th>Pelipaikka</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for pelaaja in pelaajat %}
+            <tr>
+                <td><a href="{{base_path}}/pelaajat/{{pelaaja.id}}">{{pelaaja.nimi}}</a></td>
+                <td>{{pelaaja.seura}}</td>
+                <td>{{pelaaja.taso}}</td>
+                <td>{{pelaaja.pelipaikka}}</td>
+                <td><a class="btn btn-default btn-sm " href="{{base_path}}/pelaaja/{{pelaaja.id}}/muokkaus">Muokkaa</a></td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}
+

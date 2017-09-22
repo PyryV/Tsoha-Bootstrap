@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Pelaajan luonti</h1>
+    
+    <form method="post" action="{{base_path}}/pelaajat">
+        
+        <div class="form-group">
+            <label>Nimi</label>
+            <input name="nimi" class="form-control" type="text">
+        </div>
+        <div class="form-group">
+            <label>Taso (0-99)</label>
+            <input name="taso" class="form-control" type="text">
+        </div>
+        <div class="form-group">
+            <label>Seurajoukkue</label>
+            <input name="seura" class="form-control" type="text">
+        </div>
+        <fieldset>
+            <legend>Pelipaikka</legend>
+            <input type="radio" name="pelipaikka" value="Hyökkääjä">Hyökkääjä<br>
+            <input type="radio" name="pelipaikka" value="Puolustaja">Puolustaja<br>
+            <input type="radio" name="pelipaikka" value="Maalivahti">Maalivahti<br>
+        </fieldset>
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Tallenna</button>
+        </div>    
+        
+    </form> 
+
+    
+
+{% endblock %}

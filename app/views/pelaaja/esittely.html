@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+
+    <h1>{{pelaaja.nimi}}</h1>
+    <p>
+        <a href="{{base_path}}/pelaajat/{{pelaaja.id}}/muokkaus" class="btn btn-default">Muokkaa</a>
+        <a href="#" class="btn btn-danger">Poista</a>
+    </p>
+    <ul>
+        
+        <li><strong>Taso: {{pelaaja.taso}}</strong></li>
+        <li>Seurajoukkue: {{pelaaja.seura}}</li>
+        <li>Pelipaikka: {{pelaaja.pelipaikka}}</li>
+    </ul>
+    <div class="alert alert-success">
+        {{message}}
+    </div>
+    
+    
+    
+
+
+{% endblock %}

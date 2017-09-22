@@ -1,4 +1,5 @@
--- Lisää DROP TABLE lauseet tähän tiedostoon
+-- Lisää DROP TABLE lauseet tähän tiedostoon 
+DROP TABLE IF EXISTS Sopimus CASCADE;
 DROP TABLE IF EXISTS Pelaaja CASCADE;
 DROP TABLE IF EXISTS Kayttaja CASCADE;
 DROP TABLE IF EXISTS Joukkue CASCADE;
