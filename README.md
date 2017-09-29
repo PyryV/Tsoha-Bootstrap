@@ -1,5 +1,7 @@
 # Tietokantasovelluksen esittelysivu
 
+Tämän viikon oslata palautus jäi aika kehnoksi. Tällä hetkellä vain kirjautumisnäkymät toimivat ja nekään eivät ihan kunnolla.
+
 Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://vpyry.users.cs.helsinki.fi/tsoha)

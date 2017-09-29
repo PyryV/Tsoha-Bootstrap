@@ -12,13 +12,19 @@ class HelloWorldController extends BaseController{
       // Testaa koodiasi täällä
        // $sidney = new Pelaaja(['id' => 1, 'kayttaja' => 1, 'nimi' => 'Sidney Crosby',
          //   'seura' => 'Pittshburg Penguins', 'taso' => 94, 'pelipaikka' => 'hyökkääjä']);
-        $crosby = Pelaaja::find(1);
-        $pelit = Pelaaja::all();
-        
-        Kint::dump($crosby);
-        Kint::dump($pelit);
+      /*  $pelaaja = new Pelaaja(array(
+            'kayttaja' => 1,
+            'nimi' => 'Pe',
+            'seura' => 'aaaaaaaaa',
+            'taso' => 1,
+            'pelipaikka' => 'hyökkääjä'
+        ));
+        $errors = $pelaaja->errors();
+        Kint::dump($errors);
+       
+       */
     }
-    
+    /*
     public static function login(){
         View::make('suunnitelmat/login.html');
     }
@@ -37,5 +43,5 @@ class HelloWorldController extends BaseController{
     
     public static function muokkaus_pelaaja(){
         View::make('suunnitelmat/muokkaus_pelaaja.html');
-    }
+    }*/
   }

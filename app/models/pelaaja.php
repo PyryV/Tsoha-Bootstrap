@@ -5,12 +5,12 @@ class Pelaaja extends BaseModel{
     
     public function __construct($attributes) {
         parent::__construct($attributes);
-        
+        $this->validators = array('validate_nimi', 'validate_seura', 'validate_taso', 'validate_pelipaikka');
     }
     
-    public static function all(){
-        $query = DB::connection()->prepare('SELECT * FROM Pelaaja');
-        $query->execute();
+    public static function all($id){
+        $query = DB::connection()->prepare('SELECT * FROM Pelaaja WHERE kayttaja = :id');
+        $query->execute(array('id' => $id));
         $rows = $query->fetchAll();
         $pelaajat = array();
         
@@ -55,6 +55,45 @@ class Pelaaja extends BaseModel{
         $row = $query->fetch();
         $this->id = $row['id'];
         
+    }
+    
+    public function validate_nimi(){
+        $errors = array();
+        if($this->nimi == '' || $this->nimi == NULL){
+            $errors[] = 'Nimi ei saa olla tyhjä!';
+        }
+        if(strlen($this->nimi) < 4){
+            $errors[] = 'Nimen tulee olla vähintään 4 merkkiä pitkä!';
+        }
+        return $errors;
+    }
+    
+    public function validate_seura(){
+        $errors = array();
+        if($this->seura == '' || $this->seura == NULL){
+            $errors[] = 'Seurajoukkue ei saa olla tyhjä!';
+        }
+        if(strlen($this->seura) < 2){
+            $errors[] = 'Seurajoukkueen nimen tulee olla vähintään 2 merkkiä pitkä!';
+        }
+        return $errors;
+    }
+    
+    public function validate_taso(){
+        $errors = array();
+        if(($this->taso) < 0 || ($this->taso) > 99 || $this->nimi == NULL){
+            $errors[] = 'Tason tulee olla väliltä 0-99!';
+        }
+        
+        return $errors;
+    }
+    
+    public function validate_pelipaikka(){
+        $errors = array();
+        if(($this->pelipaikka == '' ||$this->pelipaikka == NULL )){
+            $errors[] = 'Pelaajalle tulee valita pelipaikka!';
+        }
+        return $errors;
     }
 }
 

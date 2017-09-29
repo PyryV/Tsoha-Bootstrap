@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Fantasiajääkiekko</h1>
+    
+    <form method="post" action="{{base_path}}/login">
+        <div class="form-group">
+            <label>Käyttäjätunnus</label>
+            <input class="form-control" name="nimi" type="text">
+        </div>
+
+        <div class="form-group">
+            <label>Salasan</label>
+            <input class="form-control" name="password" type="password">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Kirjaudu</button>
+        {{error}} 
+    </form>
+{% endblock %}    

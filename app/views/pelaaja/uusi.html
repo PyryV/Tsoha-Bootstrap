@@ -2,19 +2,29 @@
 {% block content %}
     <h1>Pelaajan luonti</h1>
     
+    {% if errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for error in errors %}
+            <li>moi</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
     <form method="post" action="{{base_path}}/pelaajat">
         
         <div class="form-group">
             <label>Nimi</label>
-            <input name="nimi" class="form-control" type="text">
+            <input name="nimi" class="form-control" value="{{attributes.nimi}}" type="text">
         </div>
         <div class="form-group">
             <label>Taso (0-99)</label>
-            <input name="taso" class="form-control" type="text">
+            <input name="taso" class="form-control" value="{{attributes.taso}}" type="text">
         </div>
         <div class="form-group">
             <label>Seurajoukkue</label>
-            <input name="seura" class="form-control" type="text">
+            <input name="seura" class="form-control" value="{{attributes.seura}}" type="text">
         </div>
         <fieldset>
             <legend>Pelipaikka</legend>
