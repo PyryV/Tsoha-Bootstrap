@@ -8,9 +8,9 @@ class Pelaaja extends BaseModel{
         $this->validators = array('validate_nimi', 'validate_seura', 'validate_taso', 'validate_pelipaikka');
     }
     
-    public static function all($id){
-        $query = DB::connection()->prepare('SELECT * FROM Pelaaja WHERE kayttaja = :id');
-        $query->execute(array('id' => $id));
+    public static function all(){
+        $query = DB::connection()->prepare('SELECT * FROM Pelaaja');
+        $query->execute();
         $rows = $query->fetchAll();
         $pelaajat = array();
         
@@ -57,6 +57,23 @@ class Pelaaja extends BaseModel{
         
     }
     
+    public function update(){
+        $query = DB::connection()->prepare('UPDATE Pelaaja SET nimi= :nimi, seura= :seura, taso= :taso, pelipaikka= :pelipaikka WHERE id= :id');
+        
+        $query->execute(array('id' => $this->id, 'nimi' => $this->nimi, 'seura' => $this->seura, 'taso' => $this->taso, 'pelipaikka' => $this->pelipaikka));
+        $row = $query->fetch();
+        
+        
+        Kint::dump($row);
+        
+    }
+    
+    public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Pelaaja WHERE id= :id');
+        $query->execute(array('id' => $this->id));
+        $row = $query->fetch();
+    }
+    
     public function validate_nimi(){
         $errors = array();
         if($this->nimi == '' || $this->nimi == NULL){
@@ -90,8 +107,8 @@ class Pelaaja extends BaseModel{
     
     public function validate_pelipaikka(){
         $errors = array();
-        if(($this->pelipaikka == '' ||$this->pelipaikka == NULL )){
-            $errors[] = 'Pelaajalle tulee valita pelipaikka!';
+        if((($this->pelipaikka != 'Hyökkääjä' && $this->pelipaikka != 'Puolustaja' && $this->pelipaikka != 'Maalivahti') ||$this->pelipaikka == NULL )){
+            $errors[] = 'Pelaajalle tulee valita pelipaikka! (Hyökkääjä, Puolustaja tai Maalivahti)';
         }
         return $errors;
     }

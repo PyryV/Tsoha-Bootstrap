@@ -5,8 +5,13 @@
     <h1>{{pelaaja.nimi}}</h1>
     <p>
         <a href="{{base_path}}/pelaajat/{{pelaaja.id}}/muokkaus" class="btn btn-default">Muokkaa</a>
-        <a href="#" class="btn btn-danger">Poista</a>
+        
+        
     </p>
+    <form method="post" action="{{base_path}}/pelaajat/{{pelaaja.id}}/destroy" style="display: inline-block;">
+        <button type="submit" class="btn btn-danger">Poista</button>
+    </form>
+    
     <ul>
         
         <li><strong>Taso: {{pelaaja.taso}}</strong></li>

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Pelaajan luonti</h1>
+    <h1>Pelaajan muokkaus</h1>
     
     {% if errors %}
     <div class="alert alert-danger">
@@ -12,7 +12,7 @@
     </div>
     {% endif %}
     
-    <form method="post" action="{{base_path}}/pelaajat">
+    <form method="post" action="{{base_path}}/pelaajat/{{attributes.id}}/muokkaus">
         
         <div class="form-group">
             <label>Nimi</label>
@@ -31,7 +31,7 @@
             <input name="pelipaikka" class="form-control" value="{{attributes.pelipaikka}}" type="text">
         </div>
         <div class="form-group">
-            <button type="submit" class="btn btn-success">Tallenna</button>
+            <button type="submit" class="btn btn-success">Tallenna muutokset</button>
         </div>    
         
     </form> 

@@ -50,19 +50,20 @@
       PelaajaController::esittely($id);
   });
   
+  $routes->get('/pelaajat/:id/muokkaus', function($id){
+  PelaajaController::edit($id);
+  });
+  
+  $routes->post('/pelaajat/:id/muokkaus', function($id){
+  PelaajaController::update($id);
+  });
+  
+  $routes->post('/pelaajat/:id/destroy', function($id){
+  PelaajaController::destroy($id);
+  });
   
   //User
-  $routes->get('/login', function(){
-      UserController::login();
-  });
-  
-  $routes->post('/login', function(){
-      UserController::handle_login();
-  });
-  
-  $routes->get('/home', function(){
-  UserController::home();
-  });
+
   
   
   

@@ -7,7 +7,7 @@
         if(isset($_SESSION['id'])){
             $kayttaja_id = $_SESSION['id'];
             
-            $kayttaja = User::find($kauttaja_id);
+            $kayttaja = User::find($kayttaja_id);
             
             return $kayttaja;
         }
