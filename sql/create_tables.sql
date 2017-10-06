@@ -1,6 +1,6 @@
 -- Lisää CREATE TABLE lauseet tähän tiedostoon
 CREATE TABLE Kayttaja(
-    id INTEGER PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     nimi varchar(20) NOT NULL,
     password varchar(50) NOT NULL
 );

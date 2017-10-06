@@ -63,7 +63,29 @@
   });
   
   //User
-
+  $routes->get('/login', function(){
+      KayttajaController::login();
+  });
+  
+  $routes->post('/login', function(){
+      KayttajaController::handle_login();
+  });
+  
+  $routes->get('/', function(){
+    KayttajaController::home();
+  });
+  
+  $routes->post('/logout', function(){
+      KayttajaController::logout();
+  });
+  
+  $routes->get('/uusi_kayttaja', function(){
+  KayttajaController::create();
+  });
+  
+  $routes->post('/uusi_kayttaja', function(){
+  KayttajaController::store();
+  });
   
   
   

@@ -8,9 +8,16 @@ class Pelaaja extends BaseModel{
         $this->validators = array('validate_nimi', 'validate_seura', 'validate_taso', 'validate_pelipaikka');
     }
     
-    public static function all(){
-        $query = DB::connection()->prepare('SELECT * FROM Pelaaja');
-        $query->execute();
+    public static function all($kayttaja){
+        
+        if($kayttaja==null){
+            $query = DB::connection()->prepare('SELECT * FROM Pelaaja');
+            $query->execute();
+        }else{
+            $query = DB::connection()->prepare('SELECT * FROM Pelaaja WHERE kayttaja= :kayttaja');
+            $query->execute(array('kayttaja' => $kayttaja));
+        }
+        
         $rows = $query->fetchAll();
         $pelaajat = array();
         
@@ -49,9 +56,9 @@ class Pelaaja extends BaseModel{
     }
     
     public function save(){
-        $query = DB::connection()->prepare('INSERT INTO Pelaaja (nimi, seura, taso, pelipaikka)
-                VALUES (:nimi, :seura, :taso, :pelipaikka) RETURNING id');
-        $query->execute(array('nimi' => $this->nimi, 'seura' => $this->seura, 'taso' => $this->taso, 'pelipaikka' => $this->pelipaikka));
+        $query = DB::connection()->prepare('INSERT INTO Pelaaja (kayttaja,  nimi, seura, taso, pelipaikka)
+                VALUES (:kayttaja, :nimi, :seura, :taso, :pelipaikka) RETURNING id');
+        $query->execute(array('kayttaja' => $this->kayttaja, 'nimi' => $this->nimi, 'seura' => $this->seura, 'taso' => $this->taso, 'pelipaikka' => $this->pelipaikka));
         $row = $query->fetch();
         $this->id = $row['id'];
         

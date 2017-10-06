@@ -4,26 +4,33 @@ class PelaajaController extends BaseController{
     
     
     public static function index(){
-        
-        
-        $pelaajat = Pelaaja::all();
+        self::check_logged_in();
+        $kayttaja = $_SESSION['kayttaja'];
+        $pelaajat = Pelaaja::all($kayttaja);
         View::make('pelaaja/index.html', array('pelaajat' => $pelaajat));
     }
     
     public static function esittely($id){
+        self::check_logged_in();
         $pelaaja = Pelaaja::find($id);
         View::make('pelaaja/esittely.html', array('pelaaja' => $pelaaja));
     }
     
     public static function create(){
+        self::check_logged_in();
         View::make('pelaaja/uusi.html');
     }
 
 
     public static function store(){
         $params = $_POST;
+        $kayttaja = $_SESSION['kayttaja'];
+        if($kayttaja == null){
+            $kayttaja = '';
+        }
         $attributes = array(
-            'kayttaja' => 1,
+            
+            'kayttaja' => $kayttaja,
             'nimi' => $params['nimi'],
             'seura' => $params['seura'],
             'taso' => $params['taso'],
@@ -44,15 +51,17 @@ class PelaajaController extends BaseController{
     }
     
     public static function edit($id){
+        self::check_logged_in();
         $pelaaja = Pelaaja::find($id);
         View::make('pelaaja/muokkaus.html', array('attributes' => $pelaaja));
     }
     
     public static function update($id){
         $params = $_POST;
+        $kayttaja = $_SESSION['kayttaja'];
         $attributes = array(
             'id' => $id,
-            'kayttaja' => 1,
+            'kayttaja' => $kayttaja,
             'nimi' => $params['nimi'],
             'seura' => $params['seura'],
             'taso' => $params['taso'],
