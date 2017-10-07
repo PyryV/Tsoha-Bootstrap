@@ -1,6 +1,7 @@
 # Tietokantasovelluksen esittelysivu
 
-Tämän viikon oslata palautus jäi aika kehnoksi. Tällä hetkellä vain kirjautumisnäkymät toimivat ja nekään eivät ihan kunnolla.
+Päivitys!
+Sovellukseen voi nykyisin luoda oman käyttäjätunnuksen. 
 
 Yleisiä linkkejä:
 
