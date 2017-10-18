@@ -20,6 +20,9 @@ CREATE TABLE Joukkue(
     id SERIAL PRIMARY KEY,
     kayttaja INTEGER,
     nimi varchar(20),
+    hyokkaajat INTEGER,
+    puolustajat INTEGER,
+    maalivahdit INTEGER,
     FOREIGN KEY (kayttaja) REFERENCES Kayttaja(id)
 );
 

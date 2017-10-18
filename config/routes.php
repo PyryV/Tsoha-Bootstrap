@@ -87,6 +87,42 @@
   KayttajaController::store();
   });
   
+  //Joukkue
+  
+  $routes->post('/joukkueet/uusi', function(){
+      JoukkueController::store();
+  });
+  
+  $routes->get('/joukkueet/uusi', function(){
+      JoukkueController::create();
+  });
+  
+  $routes->get('/joukkueet', function(){
+      JoukkueController::index();
+  });
+  
+  $routes->get('/joukkueet/:id', function($id){
+      JoukkueController::esittely($id);
+  });
+  
+  $routes->post('/joukkueet/:id/muokkaus', function($id){
+      JoukkueController::update($id);
+  });
+  
+  $routes->get('/joukkueet/:id/muokkaus', function($id){
+      JoukkueController::edit($id);
+  });
+  
+  $routes->post('/joukkueet/:id/destroy', function($id){
+      JoukkueController::destroy($id);
+  });
+  
+  $routes->get('/joukkueet/:id/lisaa_pelaaja', function($id){
+      JoukkueController::lisaa_pelaaja($id);
+  });
+  
+  
+  
   
   
   

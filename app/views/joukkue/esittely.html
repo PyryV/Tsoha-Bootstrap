@@ -1,8 +1,28 @@
 {% extends "base.html" %}
 {% block content %}
+
+    <h1>{{joukkue.nimi}}</h1>
+    
+    <p>
+        <a href="{{base_path}}/joukkueet/{{joukkue.id}}/muokkaus" class="btn btn-default">Muokkaa</a>
+        
+    </p>
+    <div>
+        <form method="post" action="{{base_path}}/joukkueet/{{joukkue.id}}/destroy" style="display: inline-block;">
+            <button type="submit" class="btn btn-danger">Poista</button>
+        </form>
+    </div>
+    
+    <ul>
+        <li>Taso: {{joukkue.taso}}</li>
+        <li>Hyökkääjiä: {{joukkue.hyokkaajat}}</li>
+        <li>Puolustajia: {{joukkue.puolustajat}}</li>
+        <li>Maalivahteja: {{joukkue.maalivahdit}}</li>
+    </ul>
    
     <p>
-        <a href="{{base_path}}/pelaajat/uusi" class="btn btn-success">Luo uusi pelaaja</a>
+        <a href="{{base_path}}/joukkueet/{{joukkue.id}}/lisaa_pelaaja" class="btn btn-success">Lisää pelaaja</a>
+        
     </p>
     
     <table class="table table-striped table-bordered">
@@ -30,4 +50,3 @@
     </table>
 
 {% endblock %}
-

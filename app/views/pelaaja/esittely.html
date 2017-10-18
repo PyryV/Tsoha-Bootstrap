@@ -18,9 +18,11 @@
         <li>Seurajoukkue: {{pelaaja.seura}}</li>
         <li>Pelipaikka: {{pelaaja.pelipaikka}}</li>
     </ul>
+    {% if message %}
     <div class="alert alert-success">
         {{message}}
     </div>
+    {% endif %}
     
     
     

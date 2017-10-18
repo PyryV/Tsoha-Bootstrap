@@ -55,6 +55,47 @@ class Pelaaja extends BaseModel{
         }
     }
     
+    public static function joukkueen_pelaajat($id){
+        $query = DB::connection()->prepare('SELECT * FROM Pelaaja INNER JOIN Sopimus ON Sopimus.pelaaja = Pelaaja.id WHERE Sopimus.joukkue = :id');
+        $query->execute(array('id' => $id));
+        $rows = $query->fetchAll();
+        $pelaajat = array();
+        
+        foreach($rows as $row){
+            $pelaajat[]= new Pelaaja(array(
+                'id' => $row['id'],
+                'kayttaja' => $row['kayttaja'],
+                'nimi' => $row['nimi'],
+                'seura' => $row['seura'],
+                'taso' => $row['taso'],
+                'pelipaikka' => $row['pelipaikka']
+            ));
+            
+            
+        }
+        return $pelaajat;
+    }
+    
+    public static function getTaso($pelaajat, $id){
+        $query = DB::connection()->prepare('SELECT SUM(taso) FROM Pelaaja INNER JOIN Sopimus ON Sopimus.pelaaja = Pelaaja.id WHERE Sopimus.joukkue = :id');
+        $query->execute(array('id' => $id));
+        $row = $query->fetch();
+        if($row){
+            $summa = $row['sum'];
+        }
+        if(count($pelaajat)==0){
+            return 0;
+        }
+        $taso = $summa / count($pelaajat);
+        return $taso;
+    }
+    
+    
+    public static function onko_joukkueessa($joukkue, $pelaajat){
+        return array_diff($pelaajat, $joukkue);
+    }
+    
+    
     public function save(){
         $query = DB::connection()->prepare('INSERT INTO Pelaaja (kayttaja,  nimi, seura, taso, pelipaikka)
                 VALUES (:kayttaja, :nimi, :seura, :taso, :pelipaikka) RETURNING id');

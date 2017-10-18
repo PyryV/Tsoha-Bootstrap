@@ -38,7 +38,6 @@ class PelaajaController extends BaseController{
         );
         
         $pelaaja = new Pelaaja($attributes);
-        
         $errors = $pelaaja->errors();
         
         if(count($errors)==0){

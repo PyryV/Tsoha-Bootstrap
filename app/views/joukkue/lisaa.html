@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-   
-    <p>
-        <a href="{{base_path}}/pelaajat/uusi" class="btn btn-success">Luo uusi pelaaja</a>
-    </p>
+<h1>Lisää pelaaja joukkueeseen {{joukkue.nimi}}</h1>
     
     <table class="table table-striped table-bordered">
         <thead>
@@ -22,7 +19,7 @@
                 <td>{{pelaaja.seura}}</td>
                 <td>{{pelaaja.taso}}</td>
                 <td>{{pelaaja.pelipaikka}}</td>
-                <td><a class="btn btn-default btn-sm " href="{{base_path}}/pelaajat/{{pelaaja.id}}/muokkaus">Muokkaa</a></td>
+                <td><a class="btn btn-default btn-sm " href="{{base_path}}/joukkueet/{{joukkue.id}}/lisaa_pelaaja">Lisää joukkueeseen</a></td>
                 
             </tr>
             {% endfor %}
@@ -30,4 +27,3 @@
     </table>
 
 {% endblock %}
-
