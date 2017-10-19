@@ -1,7 +1,7 @@
 <?php
 
 class Joukkue extends BaseModel{
-    public $id, $kayttaja, $nimi, $taso, $hyokkaajat, $puolustajat, $maalivahdit;
+    public $id, $kayttaja, $nimi, $taso, $hyokkaajat, $puolustajat, $maalivahdit, $pelaaja_id;
     public function __construct($attributes) {
         parent::__construct($attributes);
         $this->validators = array('validate_nimi');
@@ -58,6 +58,8 @@ class Joukkue extends BaseModel{
     
 
 
+
+
     public function save(){
         $query = DB::connection()->prepare('INSERT INTO Joukkue (kayttaja,  nimi, hyokkaajat, puolustajat, maalivahdit)
                 VALUES (:kayttaja, :nimi, 0, 0, 0) RETURNING id');
@@ -84,6 +86,13 @@ class Joukkue extends BaseModel{
         $row2 = $query->fetch();
     }
     
+    public function sopimus(){
+        $query = DB::connection()->prepare('INSERT INTO Sopimus (pelaaja, joukkue) VALUES (:pelaaja, :joukkue)');
+        $query->execute(array('pelaaja' => $this->pelaaja_id, 'joukkue' => $this->id));
+        $row = $query->fetch();
+    }
+
+
     public function validate_nimi(){
         $errors = array();
         if($this->nimi == '' || $this->nimi == NULL){

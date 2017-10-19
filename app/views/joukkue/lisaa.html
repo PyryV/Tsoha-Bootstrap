@@ -19,7 +19,12 @@
                 <td>{{pelaaja.seura}}</td>
                 <td>{{pelaaja.taso}}</td>
                 <td>{{pelaaja.pelipaikka}}</td>
-                <td><a class="btn btn-default btn-sm " href="{{base_path}}/joukkueet/{{joukkue.id}}/lisaa_pelaaja">Lisää joukkueeseen</a></td>
+                
+                <td>
+                    <form method="post" action="{{base_path}}/joukkueet/{{joukkue.id}}/lisaa_pelaaja/{{pelaaja.id}}" style="display: inline-block;">
+                        <button type="submit" class="btn btn-danger">Lisää joukkueeseen</button>
+                    </form>
+                </td>
                 
             </tr>
             {% endfor %}

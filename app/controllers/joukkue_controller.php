@@ -82,14 +82,15 @@ class JoukkueController extends BaseController{
         self::check_logged_in();
         $kayttaja = $_SESSION['kayttaja'];
         $joukkue = Joukkue::find($id);
-        $joukkueen_pelaajat = Pelaaja::joukkueen_pelaajat($id);
-        $pelaajat = Pelaaja::all($kayttaja);
-        //$vapaat_pelaajat = Pelaaja::onko_joukkueessa($joukkueen_pelaajat, $pelaajat);
+        $pelaajat = Pelaaja::vapaat_pelaajat($id, $kayttaja);
+        
         View::make('joukkue/lisaa.html', array('joukkue' => $joukkue, 'pelaajat' => $pelaajat));
     }
     
-    public static function lisays(){
-        
+    public static function lisays($id, $pelaaja_id){
+        $joukkue = new Joukkue(array('id' => $id, 'pelaaja_id' => $pelaaja_id));
+        $joukkue->sopimus();
+        Redirect::to('/joukkueet/' . $id, array('message' => 'Pelaaja lisätty joukkueeseen') );
     }
     
     

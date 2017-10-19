@@ -89,11 +89,29 @@ class Pelaaja extends BaseModel{
         $taso = $summa / count($pelaajat);
         return $taso;
     }
-    
-    
-    public static function onko_joukkueessa($joukkue, $pelaajat){
-        return array_diff($pelaajat, $joukkue);
+    public static function vapaat_pelaajat($id, $kayttaja){
+        $query = DB::connection()->prepare('SELECT Pelaaja.id FROM Pelaaja INNER JOIN Sopimus ON Sopimus.pelaaja = Pelaaja.id WHERE Sopimus.joukkue = :id');
+        $query->execute(array('id' => $id));
+        $rows = $query->fetchAll();
+        $joukkueen_pelaajat = array();
+        
+        foreach($rows as $row){
+            $joukkueen_pelaajat[] = $row['id'];
+        }
+        
+        $pelaajat = self::all($kayttaja);
+        $vapaat_pelaajat = array();
+        
+        foreach ($pelaajat as $pelaaja){
+            if(!in_array($pelaaja->id, $joukkueen_pelaajat)){
+                $vapaat_pelaajat[] = $pelaaja;
+            }
+        }
+        
+        return $vapaat_pelaajat;
     }
+    
+    
     
     
     public function save(){
@@ -115,6 +133,8 @@ class Pelaaja extends BaseModel{
         Kint::dump($row);
         
     }
+    
+    
     
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM Pelaaja WHERE id= :id');

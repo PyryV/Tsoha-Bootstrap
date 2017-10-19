@@ -121,6 +121,10 @@
       JoukkueController::lisaa_pelaaja($id);
   });
   
+  $routes->post('/joukkueet/:id/lisaa_pelaaja/:pelaaja_id', function($id, $pelaaja_id){
+      JoukkueController::lisays($id, $pelaaja_id);
+  });
+  
   
   
   
