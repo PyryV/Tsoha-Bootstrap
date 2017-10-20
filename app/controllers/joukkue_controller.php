@@ -15,7 +15,12 @@ class JoukkueController extends BaseController{
         $joukkue = Joukkue::find($id);
         $pelaajat = Pelaaja::joukkueen_pelaajat($id);
         $taso = Pelaaja::getTaso($pelaajat, $id);
-        View::make('joukkue/esittely.html', array('joukkue' => $joukkue, 'pelaajat' => $pelaajat, 'taso' => $taso));
+        $taso2 = number_format($taso, 0);
+        $pelipaikat = Pelaaja::getPelipaikat($pelaajat);
+        
+        
+        View::make('joukkue/esittely.html', array('joukkue' => $joukkue, 'pelaajat' => $pelaajat, 'taso' => $taso2,
+            'hyokkaajat' => $pelipaikat['hyokkaajat'], 'puolustajat' => $pelipaikat['puolustajat'], 'maalivahdit' => $pelipaikat['maalivahdit']));
     }
     
     public static function create(){
@@ -91,6 +96,12 @@ class JoukkueController extends BaseController{
         $joukkue = new Joukkue(array('id' => $id, 'pelaaja_id' => $pelaaja_id));
         $joukkue->sopimus();
         Redirect::to('/joukkueet/' . $id, array('message' => 'Pelaaja lisätty joukkueeseen') );
+    }
+    
+    public static function poisto($id, $pelaaja_id){
+        $joukkue = new Joukkue(array('id' => $id, 'pelaaja_id' => $pelaaja_id));
+        $joukkue->pura_sopimus();
+        Redirect::to('/joukkueet/' . $id, array('message' => 'Pelaaja poistettu joukkueesta'));
     }
     
     

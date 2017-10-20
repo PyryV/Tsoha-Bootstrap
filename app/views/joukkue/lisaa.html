@@ -22,7 +22,7 @@
                 
                 <td>
                     <form method="post" action="{{base_path}}/joukkueet/{{joukkue.id}}/lisaa_pelaaja/{{pelaaja.id}}" style="display: inline-block;">
-                        <button type="submit" class="btn btn-danger">Lisää joukkueeseen</button>
+                        <button type="submit" class="btn btn-success">Lisää joukkueeseen</button>
                     </form>
                 </td>
                 
@@ -30,5 +30,8 @@
             {% endfor %}
         </tbody>
     </table>
+    <p>
+        <a href="{{base_path}}/joukkueet/{{joukkue.id}}" class="btn btn-warning">Takaisin</a>
+    </p>
 
 {% endblock %}

@@ -8,6 +8,7 @@ class Kayttaja extends BaseModel{
         $this->validators = array('validate_nimi', 'validate_password');
     }
     
+    //Palauttaa tietyn kayttjän jos se löytyy tietokannasta
     public static function find($id){
         $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE id= :id LIMIT 1');
         $query->execute(array('id' => $id));
@@ -26,6 +27,7 @@ class Kayttaja extends BaseModel{
         
     }
     
+    //Tallentaa uuden käyttäjän
     public function save(){
         $query = DB::connection()->prepare('INSERT INTO Kayttaja (nimi, password) VALUES (:nimi, :password) RETURNING id');
         $query->execute(array('nimi' => $this->nimi, 'password' => $this->password));
@@ -33,7 +35,7 @@ class Kayttaja extends BaseModel{
         $this->id = $row['id'];
     }
 
-
+    //Tarkistaa tietokannasta täsmäävätkö nimi ja salasana
     public static function authenticate($nimi, $password){
         $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE nimi= :nimi AND password= :password LIMIT 1');
         $query->execute(array('nimi' => $nimi, 'password' => $password));
@@ -53,13 +55,21 @@ class Kayttaja extends BaseModel{
         
     }
     
+    //Validaattorit
+    
     public function validate_nimi(){
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE nimi = :nimi');
+        $query->execute(array('nimi' => $this->nimi));
+        $row = $query->fetch();
         $errors = array();
         if($this->nimi == '' || $this->nimi == NULL){
             $errors[] = 'Nimi ei saa olla tyhjä!';
         }
         if(strlen($this->nimi) < 4){
             $errors[] = 'Nimen tulee olla vähintään 4 merkkiä pitkä!';
+        }
+        if($row){
+            $errors[] = 'Nimi on jo käytössä!';
         }
         return $errors;
     }

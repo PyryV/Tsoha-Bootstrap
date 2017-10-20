@@ -7,6 +7,7 @@ class Joukkue extends BaseModel{
         $this->validators = array('validate_nimi');
     }
     
+    //Palauttaa käyttäjän kaikki joukkueet
     public static function all($kayttaja){
         if($kayttaja==null){
             $query = DB::connection()->prepare('SELECT * FROM Joukkue');
@@ -34,6 +35,7 @@ class Joukkue extends BaseModel{
         return $joukkueet;
     }
     
+    //Palauttaa tietyn joukkueen
     public static function find($id){
         $query = DB::connection()->prepare('SELECT * FROM Joukkue WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
@@ -55,11 +57,7 @@ class Joukkue extends BaseModel{
         }
     }
     
-    
-
-
-
-
+    //Tallentaa uuden joukkueen
     public function save(){
         $query = DB::connection()->prepare('INSERT INTO Joukkue (kayttaja,  nimi, hyokkaajat, puolustajat, maalivahdit)
                 VALUES (:kayttaja, :nimi, 0, 0, 0) RETURNING id');
@@ -68,6 +66,7 @@ class Joukkue extends BaseModel{
         $this->id = $row['id'];
     }
     
+    //Päivittää joukkueeseen tehdyt muutokset tietokantaan
     public function update(){
         $query = DB::connection()->prepare('UPDATE Joukkue SET nimi= :nimi, hyokkaajat= :hyokkaajat, puolustajat= :puolustajat, maalivahdit= :maalivahdit WHERE id= :id');
         
@@ -76,6 +75,7 @@ class Joukkue extends BaseModel{
         Kint::dump($row);
     }
     
+    //Poistaa joukkueen tietokannasta
     public function destroy() {
         $query = DB::connection()->prepare('DELETE FROM Sopimus WHERE Sopimus.joukkue = :id');
         $query->execute(array('id' => $this->id));
@@ -86,13 +86,21 @@ class Joukkue extends BaseModel{
         $row2 = $query->fetch();
     }
     
+    //Luo sopimuksen pelaajan ja joukkueen välille
     public function sopimus(){
         $query = DB::connection()->prepare('INSERT INTO Sopimus (pelaaja, joukkue) VALUES (:pelaaja, :joukkue)');
         $query->execute(array('pelaaja' => $this->pelaaja_id, 'joukkue' => $this->id));
         $row = $query->fetch();
     }
+    
+    public function pura_sopimus(){
+        $query = DB::connection()->prepare('DELETE FROM Sopimus WHERE Sopimus.pelaaja = :pelaaja AND Sopimus.joukkue = :joukkue');
+        $query->execute(array('pelaaja' => $this->pelaaja_id, 'joukkue' => $this->id));
+        
+    }
 
-
+    //Validaattorit
+    
     public function validate_nimi(){
         $errors = array();
         if($this->nimi == '' || $this->nimi == NULL){

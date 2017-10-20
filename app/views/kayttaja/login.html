@@ -12,7 +12,7 @@
             <input class="form-control" name="password" type="password">
         </div>
         <p>
-            <button type="submit" class="btn btn-primary">Kirjaudu</button>
+            <button type="submit" class="btn btn-success">Kirjaudu</button>
         </p>  
         {% if message %}
             <div class="alert alert-success">{{message}}</div>
@@ -21,4 +21,8 @@
             <div class="alert alert-danger">{{message_varoitus}}</div>
         {% endif %}
     </form>
+    
+    <p>
+        <a href="{{base_path}}" class="btn btn-warning">Takaisin</a>
+    </p>
 {% endblock %} 

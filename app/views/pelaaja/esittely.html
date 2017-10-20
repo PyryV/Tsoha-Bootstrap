@@ -5,12 +5,10 @@
     <h1>{{pelaaja.nimi}}</h1>
     <p>
         <a href="{{base_path}}/pelaajat/{{pelaaja.id}}/muokkaus" class="btn btn-default">Muokkaa</a>
-        
+        <a href="{{base_path}}/pelaajat/{{pelaaja.id}}/uusi_tilasto" class="btn btn-info">Lisää tilasto</a>
         
     </p>
-    <form method="post" action="{{base_path}}/pelaajat/{{pelaaja.id}}/destroy" style="display: inline-block;">
-        <button type="submit" class="btn btn-danger">Poista</button>
-    </form>
+    
     
     <ul>
         
@@ -25,7 +23,46 @@
     {% endif %}
     
     
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Päivä</th>
+                <th>Maalit</th>
+                <th>Syötöt</th>
+                <th>Pisteet</th>
+                <th>+/-</th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            {% for tilasto in tilastot %}
+            <tr>
+                <td>{{tilasto.paivamaara}}</td>
+                <td>{{tilasto.maalit}}</a></td>
+                <td>{{tilasto.syotot}}</td>
+                <td>{{tilasto.pisteet}}</td>
+                <td>{{tilasto.plusmiinus}}</td>
+                <td>
+                    <div class="poistonappula">
+                        <form method="post" action="{{base_path}}/pelaajat/{{pelaaja.id}}/{{tilasto.id}}" style="display: inline-block;">
+                            <button type="submit" class="btn btn-danger">Poista</button>
+                        </form>
+                    </div> 
+                </td>
+                
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     
-
-
+    
+    <div class="poistonappula">
+        <form method="post" action="{{base_path}}/pelaajat/{{pelaaja.id}}/destroy" style="display: inline-block;">
+            <button type="submit" class="btn btn-danger">Poista</button>
+        </form>
+    </div>    
+    
+    <p>
+        <a href="{{base_path}}/pelaajat" class="btn btn-warning">Takaisin</a>
+    </p>
 {% endblock %}

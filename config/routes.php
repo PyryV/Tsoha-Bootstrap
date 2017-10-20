@@ -30,6 +30,8 @@
     HelloWorldController::muokkaus_pelaaja();
   });
   */
+
+  
   
   
   
@@ -61,6 +63,22 @@
   $routes->post('/pelaajat/:id/destroy', function($id){
   PelaajaController::destroy($id);
   });
+  
+  
+  //Tilasto
+  $routes->post('/pelaajat/:id', function($id){
+      TilastoController::tallenna_tilasto($id);
+  });
+  
+  $routes->get('/pelaajat/:id/uusi_tilasto', function($id){
+      TilastoController::create_tilasto($id);
+  });
+  
+  $routes->post('/pelaajat/:id/:tilasto_id', function($id, $tilasto_id){
+      TilastoController::destroy($id, $tilasto_id); 
+  });
+  
+  
   
   //User
   $routes->get('/login', function(){
@@ -101,6 +119,10 @@
       JoukkueController::index();
   });
   
+  $routes->post('/joukkueet/:id/:pelaaja_id', function($id, $pelaaja_id){
+      JoukkueController::poisto($id, $pelaaja_id);
+  });
+  
   $routes->get('/joukkueet/:id', function($id){
       JoukkueController::esittely($id);
   });
@@ -124,6 +146,7 @@
   $routes->post('/joukkueet/:id/lisaa_pelaaja/:pelaaja_id', function($id, $pelaaja_id){
       JoukkueController::lisays($id, $pelaaja_id);
   });
+  
   
   
   

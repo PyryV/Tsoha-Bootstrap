@@ -2,9 +2,19 @@
   max-width: 1200px;
   padding: 10px 25px;
   margin: 0px auto;
+  
+}
+
+.navbar{
+    background-color: #ffff66;
 }
 
 .navbar .container-fluid{
   max-width: 1200px;
   margin: 0px auto;
+  
+}
+
+.poistonappula{
+    margin-bottom: 10px;
 }

@@ -32,3 +32,14 @@ CREATE TABLE Sopimus(
     FOREIGN KEY (pelaaja) REFERENCES Pelaaja(id),
     FOREIGN KEY (joukkue) REFERENCES Joukkue(id)
 );
+
+CREATE TABLE Tilasto(
+    id SERIAL PRIMARY KEY,
+    paivamaara varchar,
+    pelaaja INTEGER,
+    maalit INTEGER,
+    syotot INTEGER,
+    pisteet INTEGER,
+    plusmiinus INTEGER,
+    FOREIGN KEY (pelaaja) REFERENCES Pelaaja(id)
+);

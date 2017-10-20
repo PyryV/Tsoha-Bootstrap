@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Uusi tilasto pelaajalle: {{pelaaja.nimi}}</h1>
+    
+    {% if errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for error in errors %}
+            <li>{{error}}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    
+    <form method="post" action="{{base_path}}/pelaajat/{{pelaaja.id}}{{attributes.pelaaja}}">
+        
+        <div class="form-group">
+            <label>Maalit</label>
+            <input name="maalit" class="form-control" maxlength="3" value="{{attributes.maalit}}" type="text">
+        </div>
+        <div class="form-group">
+            <label>Syötöt</label>
+            <input name="syotot" class="form-control" maxlength="3" value="{{attributes.syotot}}" type="text">
+        </div>
+        <div class="form-group">
+            <label>Plusmiinustilasto(+/-)</label>
+            <input name="plusmiinus" class="form-control" maxlength="3" value="{{attributes.plusmiinus}}" type="text">
+        </div>
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-success">Tallenna</button>
+        </div>    
+        <p>
+            <a href="{{base_path}}/pelaajat" class="btn btn-danger">Keskeytä</a>
+        </p>
+        
+    </form> 
+
+    
+
+{% endblock %}

@@ -16,7 +16,7 @@
         
         <div class="form-group">
             <label>Nimi</label>
-            <input name="nimi" class="form-control" value="{{attributes.nimi}}" type="text">
+            <input name="nimi" class="form-control" maxlength="30" value="{{attributes.nimi}}" type="text">
         </div>
         
         <div class="form-group">
@@ -24,6 +24,9 @@
         </div>    
         
     </form> 
+    <p>
+        <a href="{{base_path}}/joukkueet/{{attributes.id}}" class="btn btn-danger">Keskeytä</a>
+    </p>
 
     
 

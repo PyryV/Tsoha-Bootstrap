@@ -3,8 +3,8 @@
 {% if kayttaja_logged_in %}   
     <h1>Kirjautuneena: {{kayttaja_logged_in.nimi}}</h1>
     <p>
-        <a href="{{base_path}}/joukkueet" class="btn btn-default">Joukkueet</a>
-        <a href="{{base_path}}/pelaajat" class="btn btn-default">Pelaajat</a>
+        <a href="{{base_path}}/joukkueet" class="btn btn-primary">Joukkueet</a>
+        <a href="{{base_path}}/pelaajat" class="btn btn-info">Pelaajat</a>
     </p>
 {% else %}
     <h1>Tervetuloa Fantasiajääkiekko-sovellukseen!</h1>

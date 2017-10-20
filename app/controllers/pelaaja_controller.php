@@ -1,5 +1,6 @@
 <?php
 require 'app/models/pelaaja.php';
+require 'app/models/tilasto.php';
 class PelaajaController extends BaseController{
     
     
@@ -13,14 +14,16 @@ class PelaajaController extends BaseController{
     public static function esittely($id){
         self::check_logged_in();
         $pelaaja = Pelaaja::find($id);
-        View::make('pelaaja/esittely.html', array('pelaaja' => $pelaaja));
+        $tilastot = Tilasto::all($id);
+        View::make('pelaaja/esittely.html', array('pelaaja' => $pelaaja, 'tilastot' => $tilastot));
     }
     
     public static function create(){
         self::check_logged_in();
         View::make('pelaaja/uusi.html');
     }
-
+    
+   
 
     public static function store(){
         $params = $_POST;

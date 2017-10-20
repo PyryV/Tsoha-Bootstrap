@@ -3,27 +3,21 @@
 
     <h1>{{joukkue.nimi}}</h1>
     
-    <p>
-        <a href="{{base_path}}/joukkueet/{{joukkue.id}}/muokkaus" class="btn btn-default">Muokkaa</a>
-        
-    </p>
-    <div>
-        <form method="post" action="{{base_path}}/joukkueet/{{joukkue.id}}/destroy" style="display: inline-block;">
-            <button type="submit" class="btn btn-danger">Poista</button>
-        </form>
-    </div>
+    
     
     <ul>
-        <li>Taso: {{joukkue.taso}}</li>
-        <li>Hyökkääjiä: {{joukkue.hyokkaajat}}</li>
-        <li>Puolustajia: {{joukkue.puolustajat}}</li>
-        <li>Maalivahteja: {{joukkue.maalivahdit}}</li>
+        <li>Taso: {{taso}}</li>
+        <li>Hyökkääjiä: {{hyokkaajat}}</li>
+        <li>Puolustajia: {{puolustajat}}</li>
+        <li>Maalivahteja: {{maalivahdit}}</li>
     </ul>
    
     <p>
-        <a href="{{base_path}}/joukkueet/{{joukkue.id}}/lisaa_pelaaja" class="btn btn-success">Lisää pelaaja</a>
-        
+        <a href="{{base_path}}/joukkueet/{{joukkue.id}}/lisaa_pelaaja" class="btn btn-success" >Lisää pelaaja</a>
+        <a href="{{base_path}}/joukkueet/{{joukkue.id}}/muokkaus" class="btn btn-default">Muokkaa nimeä</a>
     </p>
+    
+    
     
     <table class="table table-striped table-bordered">
         <thead>
@@ -43,10 +37,24 @@
                 <td>{{pelaaja.taso}}</td>
                 <td>{{pelaaja.pelipaikka}}</td>
                 <td><a class="btn btn-default btn-sm " href="{{base_path}}/pelaajat/{{pelaaja.id}}/muokkaus">Muokkaa</a></td>
+                <td>
+                    <form method="post" action="{{base_path}}/joukkueet/{{joukkue.id}}/{{pelaaja.id}}" style="display: inline-block;">
+                        <button type="submit" class="btn btn-danger">Poista joukkueesta</button>
+                    </form>
+                </td>
                 
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    <div class="poistonappula">
+        <form method="post" action="{{base_path}}/joukkueet/{{joukkue.id}}/destroy" style="display: inline-block;">
+            <button type="submit" class="btn btn-danger">Poista</button>
+        </form>
+    </div>
+    
+    <p>
+        <a href="{{base_path}}/joukkueet" class="btn btn-warning">Takaisin</a>
+    </p>
 
 {% endblock %}

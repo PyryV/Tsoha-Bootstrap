@@ -8,6 +8,7 @@ class Pelaaja extends BaseModel{
         $this->validators = array('validate_nimi', 'validate_seura', 'validate_taso', 'validate_pelipaikka');
     }
     
+    //Palauttaa käyttäjän kaikki pelaajat
     public static function all($kayttaja){
         
         if($kayttaja==null){
@@ -36,6 +37,7 @@ class Pelaaja extends BaseModel{
         return $pelaajat;
     }
     
+    //Palauttaa tietyn pelaajan
     public static function find($id){
         $query = DB::connection()->prepare('SELECT * FROM Pelaaja WHERE id = :id LIMIT 1');
         $query->execute(array('id' => $id));
@@ -54,7 +56,7 @@ class Pelaaja extends BaseModel{
             return $pelaaja;
         }
     }
-    
+    //Palauttaa tietyssä joukkueessa olevat pelaajat
     public static function joukkueen_pelaajat($id){
         $query = DB::connection()->prepare('SELECT * FROM Pelaaja INNER JOIN Sopimus ON Sopimus.pelaaja = Pelaaja.id WHERE Sopimus.joukkue = :id');
         $query->execute(array('id' => $id));
@@ -75,7 +77,7 @@ class Pelaaja extends BaseModel{
         }
         return $pelaajat;
     }
-    
+    //Palauttaa annetun pelaajalistan keskitason
     public static function getTaso($pelaajat, $id){
         $query = DB::connection()->prepare('SELECT SUM(taso) FROM Pelaaja INNER JOIN Sopimus ON Sopimus.pelaaja = Pelaaja.id WHERE Sopimus.joukkue = :id');
         $query->execute(array('id' => $id));
@@ -89,6 +91,26 @@ class Pelaaja extends BaseModel{
         $taso = $summa / count($pelaajat);
         return $taso;
     }
+    
+    public static function getPelipaikat($pelaajat){
+        $hyokkaajat = 0;
+        $puolustajat = 0;
+        $maalivahdit = 0;
+        foreach ($pelaajat as $pelaaja){
+            if($pelaaja->pelipaikka == 'Hyökkääjä'){
+                $hyokkaajat++;
+            }else if($pelaaja->pelipaikka == 'Puolustaja'){
+                $puolustajat++;
+            }else{
+                $maalivahdit++;
+            }
+        }
+        $pelipaikat = array('hyokkaajat' => $hyokkaajat, 'puolustajat' => $puolustajat, 'maalivahdit' => $maalivahdit);
+        return $pelipaikat;
+    }
+
+
+    //Palauttaa tietyn joukkueen ulkopuolella olevat pelaajat
     public static function vapaat_pelaajat($id, $kayttaja){
         $query = DB::connection()->prepare('SELECT Pelaaja.id FROM Pelaaja INNER JOIN Sopimus ON Sopimus.pelaaja = Pelaaja.id WHERE Sopimus.joukkue = :id');
         $query->execute(array('id' => $id));
@@ -113,7 +135,7 @@ class Pelaaja extends BaseModel{
     
     
     
-    
+    //Tallentaa uuden pelaajan tietokantaan
     public function save(){
         $query = DB::connection()->prepare('INSERT INTO Pelaaja (kayttaja,  nimi, seura, taso, pelipaikka)
                 VALUES (:kayttaja, :nimi, :seura, :taso, :pelipaikka) RETURNING id');
@@ -123,6 +145,7 @@ class Pelaaja extends BaseModel{
         
     }
     
+    //Päivittää pelaajaan tehdyt muokkaukset tietokantaan
     public function update(){
         $query = DB::connection()->prepare('UPDATE Pelaaja SET nimi= :nimi, seura= :seura, taso= :taso, pelipaikka= :pelipaikka WHERE id= :id');
         
@@ -134,13 +157,18 @@ class Pelaaja extends BaseModel{
         
     }
     
-    
-    
+    //Poistaa pelaajan tietokannasta
     public function destroy() {
+        $query = DB::connection()->prepare('DELETE FROM Sopimus WHERE Sopimus.pelaaja = :id');
+        $query->execute(array('id' => $this->id));
+        $row = $query->fetch();
         $query = DB::connection()->prepare('DELETE FROM Pelaaja WHERE id= :id');
         $query->execute(array('id' => $this->id));
         $row = $query->fetch();
     }
+    
+    
+    //Validaattorit
     
     public function validate_nimi(){
         $errors = array();
@@ -166,7 +194,7 @@ class Pelaaja extends BaseModel{
     
     public function validate_taso(){
         $errors = array();
-        if(($this->taso) < 0 || ($this->taso) > 99 || $this->nimi == NULL){
+        if(($this->taso) < 0 || ($this->taso) > 99 || $this->taso == NULL || !is_numeric($this->taso)){
             $errors[] = 'Tason tulee olla väliltä 0-99!';
         }
         
